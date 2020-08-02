@@ -5,17 +5,31 @@ from pprint import pprint
 
 # the string with the highest score
 # How to score?
-# Using character frequency
 # in this case i take the number of printable character in a string 
 ## (as per the ascii table)
 # it can be made better if the particular characters are given
-def score(byteString):
-    score = 0
-    for i in byteString:
-        if i>=32 and i<=126:
-            score+=1
-    return score
+# def score(byteString):
+#     score = 0
+#     for i in byteString:
+#         if i>=32 and i<=126:
+#             score+=1
+#     return score
 # one issue is there can be multiple strings with same score
+
+
+# a better way to get score by using englist character frequencies
+def score(input_bytes):
+    # character frequencies
+    characterFrequencies = {
+        'a': .08167, 'b': .01492, 'c': .02782, 'd': .04253,
+        'e': .12702, 'f': .02228, 'g': .02015, 'h': .06094,
+        'i': .06094, 'j': .00153, 'k': .00772, 'l': .04025,
+        'm': .02406, 'n': .06749, 'o': .07507, 'p': .01929,
+        'q': .00095, 'r': .05987, 's': .06327, 't': .09056,
+        'u': .02758, 'v': .00978, 'w': .02360, 'x': .00150,
+        'y': .01974, 'z': .00074, ' ': .13000
+    }
+    return sum([characterFrequencies.get(chr(byte), 0) for byte in input_bytes.lower()])
 
 # decrypt ceaser cipher for bytes
 def decrypt(byteString):
@@ -38,7 +52,7 @@ def decrypt(byteString):
             
     return maxScoreList
 
-# given strings
+# # given strings
 hexString = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 byteString = bytes.fromhex(hexString)
 
