@@ -14,7 +14,8 @@ def hexTobase64(hexString):
     # encoded byte string 
     return encodedString
 
-# input hex string
-hexString = input()
+if __name__ == "__main__":
+    # input hex string
+    hexString = input()
 
-print(hexTobase64(hexString).decode())
+    print(hexTobase64(hexString).decode())

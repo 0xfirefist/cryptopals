@@ -19,7 +19,7 @@ def detect(ciphers):
             possibleCiphers = possibleCiphers + [cipher]
     return possibleCiphers
 
-
-# read file input
-ciphers = open("files/4.txt").read().split("\n")
-pprint(detect(ciphers))
+if __name__ == "__main__":
+    # read file input
+    ciphers = open("files/4.txt").read().split("\n")
+    pprint(detect(ciphers))
