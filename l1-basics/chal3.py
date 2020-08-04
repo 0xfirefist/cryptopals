@@ -36,6 +36,7 @@ def decrypt(byteString):
     # initializing max score byte strings
     maxScoreList=[byteString]
     maxScore = score(byteString)
+    key = []
 
     # xor the bytestring with a byte 
     for i in range(256):
@@ -47,10 +48,12 @@ def decrypt(byteString):
         if  newScore > maxScore:
             maxScoreList = [newString]
             maxScore = newScore
+            key = [chr(i)]
         elif newScore == maxScore:
             maxScoreList = maxScoreList + [newString]
+            key = key + [chr(i)]
             
-    return maxScoreList
+    return key
 
 if __name__ == "__main__":
     # # given strings
