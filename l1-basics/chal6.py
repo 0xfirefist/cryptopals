@@ -1,5 +1,7 @@
 # Break repeating-key XOR
 import base64
+from chal3 import decrypt as Decrypt
+import itertools
 
 # break into blocks of keysize
 def getBlocks(byteString,keySize):
@@ -50,8 +52,24 @@ def guessSize(byteString):
 
 # TODO
 def decrypt(cbytes,guessedSize):
-    oneSizeKeyCiphers = []
-    for byte in range(cbytes):
+    # get one key ciphers
+    oneKeyCiphers = []
+    for index in range(guessedSize):
+        oneKeyCipher = b''
+        for i in range(index,len(cbytes),guessedSize):
+            oneKeyCipher = oneKeyCipher + bytes([cbytes[i]])
+        oneKeyCiphers = oneKeyCiphers + [oneKeyCipher]
+    # key guessing
+    keys = []
+    for cipher in oneKeyCiphers:
+        # here Decrypt will return possible list of keys for given one key cipher
+        keys = keys + [Decrypt(cipher)]
+    # from the keys of one key ciphers 
+    # generate compolete key
+    for possKey in list(itertools.product(*keys)):
+        print(''.join(possKey))
+    
+
 
 
 if __name__ == "__main__":
@@ -59,4 +77,6 @@ if __name__ == "__main__":
     assert(calHamDist([b'this is a test',b'wokka wokka!!!'])==37)
     ctext = open("/home/devil/AUGUST/cryptopals/l1-basics/files/6.txt").read()
     cbyte = base64.b64decode(ctext)
-    print(guessSize(cbyte))
+    guessedSize = guessSize(cbyte)
+    print(guessedSize)
+    decrypt(cbyte,guessedSize)
