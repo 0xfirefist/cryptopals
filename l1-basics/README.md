@@ -35,6 +35,6 @@ The intuition is hamming distance between printable characters (mostle alphabats
 In the above example.
 Distance between (a,e) == (g,k) (xor with same byte doesnot matter)
 
-Whereas distance between (a,b) will be different like that between non printable character and a printable character.Say a^x = g, the hamming distance between (a,b) = (a^x,b^x). Now (a,b) = (g,something non printable(maybe))
+Whereas distance between (a,b) will be different. It will be like that between non printable character and a printable character.Say a^x = g, the hamming distance between (a,b) = (a^x,b^x). Now (a,b) = (g,something non printable(maybe))
 
 I will add other details too. This is my intuition to understand why is this working.
